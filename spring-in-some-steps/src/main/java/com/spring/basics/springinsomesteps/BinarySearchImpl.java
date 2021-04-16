@@ -1,7 +1,15 @@
 package com.spring.basics.springinsomesteps;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+//I want to tell that BinarySearchImpl is a bean? how? with "@Component" annotation
+@Component
 public class BinarySearchImpl { // impl stands for implementation
 	// *figure 1*
+	//How do i tell spring this is a dependency? with "@Autowired" annotation
+	//Now im telling BinarySearchImpl depends on SortAlgorithm. SortAlgorithm is a dependency for BinarySearchImpl
+	@Autowired
 	private SortAlgorithm sortAlgorithm;
 
 	public BinarySearchImpl(SortAlgorithm sortAlgorithm) {
