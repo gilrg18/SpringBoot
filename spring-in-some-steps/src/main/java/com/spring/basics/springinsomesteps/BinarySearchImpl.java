@@ -12,10 +12,15 @@ public class BinarySearchImpl { // impl stands for implementation
 	@Autowired
 	private SortAlgorithm sortAlgorithm;
 
-	public BinarySearchImpl(SortAlgorithm sortAlgorithm) {
+	
+	/*public BinarySearchImpl(SortAlgorithm sortAlgorithm) {
 		super();
 		this.sortAlgorithm = sortAlgorithm;
-	}
+	}*/
+	//Instead of using constructor we'll use Setter Injection
+	/*public void setSortAlgorithm(SortAlgorithm sortAlgorithm) {
+		this.sortAlgorithm = sortAlgorithm;
+	}*/
 
 	public int binarySearch(int[] numbers, int numberToSearchFor) {
 		// Sorting an array (bubble sort or quick sort)

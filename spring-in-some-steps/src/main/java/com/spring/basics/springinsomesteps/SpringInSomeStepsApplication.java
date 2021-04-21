@@ -28,9 +28,11 @@ public class SpringInSomeStepsApplication {
 		//BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
 		//System.out.println(result);
 		//this is another bean (new QuicksortAlgorithm())
-		BinarySearchImpl binarySearch2 = new BinarySearchImpl(new QuickSortAlgorithm());
+		
+		//we cant do this now with setter injection..
+		/*BinarySearchImpl binarySearch2 = new BinarySearchImpl(new QuickSortAlgorithm());
 		int result2 = binarySearch2.binarySearch(new int[] {12,4,6}, 3);
-		System.out.println(result2);
+		System.out.println(result2);*/
 		
 		//Application Context: maintains all the beans
 		//The .run method returns the application context: Assign next line to a variable
