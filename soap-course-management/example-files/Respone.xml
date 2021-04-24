@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetCourseDetailsRespone xmlns="http://gil.com/courses">
+	<id>123</id>
+</GetCourseDetailsResponse>
