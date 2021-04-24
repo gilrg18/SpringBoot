@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns ="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://gil.com/courses"
+xmlns:tns="http://gil.com/courses" elementFormDefault="qualified">
+	<element name= "GetCourseDetailsRequest">
+		<complexType>
+			<sequence>
+				<element name="id" type= "integer"></element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>
+
+
+<!--
+<GetCourseDetailsRequest xmlns="http://gil.com/courses">
+	<id>123</id>  only numbers acceptable this is possible using XSD(XML Schema Definition) 
+</GetCourseDetailsRequest>
+
+-->

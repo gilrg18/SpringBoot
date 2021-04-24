@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GetCourseDetailsRequest xmlns="http://gil.com/courses">
-	<id>123</id> <!-- only numbers acceptablem this is possible using XSD(XML Schema Definition) -->
+<GetCourseDetailsRequest xmlns="http://gil.com/courses" 
+xsi:schemaLocation="http://gil.com/courses course-details.xsd"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<id>123</id> <!-- only numbers acceptable this is possible using XSD(XML Schema Definition) -->
 </GetCourseDetailsRequest>
