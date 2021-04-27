@@ -10,6 +10,10 @@ import com.soap.webservices.soapcoursemanagement.soap.bean.Course;
 
 @Component
 public class CourseDetailsService {
+	
+	public enum Status{
+		SUCCESS, FAILURE;
+	}
 
 	private static List<Course> courses = new ArrayList<>();
 
@@ -45,16 +49,16 @@ public class CourseDetailsService {
 	// deletecourse
 	// int deleteById(int id)
 	// returns 1 if delete is successfull, 0 if not
-	public int deleteById(int id) {
+	public Status deleteById(int id) {
 		Iterator<Course> iterator = courses.iterator();
 		while(iterator.hasNext()) {
 			Course course = iterator.next();
 			if(course.getId()==id) {
 				iterator.remove();
-				return 1;
+				return Status.SUCCESS;
 			}
 		}
-		return 0;
+		return Status.FAILURE;
 		
 		/*for(Course course: courses) {
 			if(course.getId()==id) {

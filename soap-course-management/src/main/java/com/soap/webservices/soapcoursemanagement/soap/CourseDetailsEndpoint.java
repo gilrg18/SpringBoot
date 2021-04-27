@@ -9,10 +9,13 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.gil.courses.CourseDetails;
+import com.gil.courses.DeleteCourseDetailsRequest;
+import com.gil.courses.DeleteCourseDetailsResponse;
 import com.gil.courses.GetAllCourseDetailsRequest;
 import com.gil.courses.GetAllCourseDetailsResponse;
 import com.gil.courses.GetCourseDetailsRequest;
 import com.gil.courses.GetCourseDetailsResponse;
+import com.gil.courses.Status;
 import com.soap.webservices.soapcoursemanagement.soap.bean.Course;
 import com.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService;
 
@@ -50,10 +53,27 @@ public class CourseDetailsEndpoint {
 		List<Course> courses= service.findAll();
 		
 		return mapAllCourseDetails(courses);
-		// response is java which needs to be converted back to xml, use
-		// @ResponsePayload
 	}
 	
+	@PayloadRoot(namespace = "http://gil.com/courses", localPart = "DeleteCourseDetailsRequest")
+	@ResponsePayload
+	public DeleteCourseDetailsResponse deleteCourseDetailsRequest(@RequestPayload DeleteCourseDetailsRequest request) {
+		//map the service enum status to the class status in com.gil.courses
+		com.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService.Status status = service.deleteById(request.getId());
+		
+		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
+		//map the status to the status class
+		response.setStatus(mapStatus(status));
+		return response;
+	}
+	
+	//Status is the class (bean) in com.gil.courses package
+	private com.gil.courses.Status mapStatus(com.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService.Status status) {
+		// TODO Auto-generated method stub
+		if(status == com.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService.Status.FAILURE)
+			return com.gil.courses.Status.FAILURE;
+		return com.gil.courses.Status.SUCCESS;
+	}
 
 	private GetCourseDetailsResponse mapCourseDetails(Course course) {
 		GetCourseDetailsResponse response = new GetCourseDetailsResponse();
@@ -72,6 +92,9 @@ public class CourseDetailsEndpoint {
 
 		return response;
 	}
+	
+	
+	
 
 	private CourseDetails mapCourse(Course course) {
 		CourseDetails courseDetails = new CourseDetails();
