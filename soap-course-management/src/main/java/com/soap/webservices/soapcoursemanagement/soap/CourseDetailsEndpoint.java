@@ -17,6 +17,7 @@ import com.gil.courses.GetCourseDetailsRequest;
 import com.gil.courses.GetCourseDetailsResponse;
 import com.gil.courses.Status;
 import com.soap.webservices.soapcoursemanagement.soap.bean.Course;
+import com.soap.webservices.soapcoursemanagement.soap.exception.CourseNotFoundException;
 import com.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService;
 
 @Endpoint
@@ -41,6 +42,8 @@ public class CourseDetailsEndpoint {
 
 		Course course = service.findById(request.getId());
 		
+		if(course==null) throw new CourseNotFoundException("Invalid Course Id "+request.getId());
+			
 		return mapCourseDetails(course);
 		// response is java which needs to be converted back to xml, use
 		// @ResponsePayload
