@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gil.rest.webservices.restfulwebservices.exception.UserNotFoundException;
+
 @RestController
 public class UserResource {
 	
