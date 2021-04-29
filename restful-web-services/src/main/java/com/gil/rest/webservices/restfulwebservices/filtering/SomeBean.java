@@ -1,10 +1,14 @@
 package com.gil.rest.webservices.restfulwebservices.filtering;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//One way to ignore a field from response
-@JsonIgnoreProperties(value= {"field1","field2"})
+//Filtering - One way to ignore a field from response
+//JsonIgnoreProperties and JsonIgnore directly on the bean for static filtering
+//@JsonIgnoreProperties(value= {"field1","field2"})
+//Dynamic Filtering JsonFilter
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
 	private String field1;
 	//i dont want this field to be sent in the response
