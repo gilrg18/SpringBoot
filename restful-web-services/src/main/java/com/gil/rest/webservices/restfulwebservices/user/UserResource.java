@@ -3,6 +3,8 @@ package com.gil.rest.webservices.restfulwebservices.user;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,7 +56,8 @@ public class UserResource {
 	//be mapped to the method parameter (User user)
 	//we need a rest client to do post requests (POSTMAN)
 	@PostMapping("/users")
-	public ResponseEntity<Object> createdUser(@RequestBody User user) {
+	//Enable validation on specific user with @Valid
+	public ResponseEntity<Object> createdUser(@Valid @RequestBody User user) {
 		User savedUser = service.save(user);
 		// return the URI /user/{id} -> /user/savedUser.getId()
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
