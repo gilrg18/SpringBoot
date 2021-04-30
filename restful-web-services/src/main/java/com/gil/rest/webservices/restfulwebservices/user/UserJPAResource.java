@@ -60,12 +60,8 @@ public class UserJPAResource {
 	}
 
 	@DeleteMapping("/jpa/users/{id}")
-	public User deleteUser(@PathVariable int id) {
-		User user = service.deleteById(id);
-		if (user == null) {
-			throw new UserNotFoundException("id-" + id);
-		}
-		return user;
+	public void deleteUser(@PathVariable int id) {
+		userRepository.deleteById(id);
 	}
 
 	// input - details of user
@@ -76,7 +72,7 @@ public class UserJPAResource {
 	@PostMapping("/jpa/users")
 	// Enable validation on specific user with @Valid
 	public ResponseEntity<Object> createdUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user);
+		User savedUser = userRepository.save(user);
 		// return the URI /user/{id} -> /user/savedUser.getId()
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
 				.toUri();
