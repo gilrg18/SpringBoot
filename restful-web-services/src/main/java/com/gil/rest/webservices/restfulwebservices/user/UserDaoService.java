@@ -12,12 +12,12 @@ public class UserDaoService {
 	private static List<User> users = new ArrayList<>();
 	// counter to determine id.. 3 current users in our array
 	private static int usersCount = 3;
-	static {
+/*	static {
 		users.add(new User(1, "Gil", new Date()));
 		users.add(new User(2, "Maik", new Date()));
 		users.add(new User(3, "Laura", new Date()));
 	}
-
+*/
 	public List<User> findAll() {
 		return users;
 	}
