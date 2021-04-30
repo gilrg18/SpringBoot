@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Post {
 
@@ -17,6 +19,7 @@ public class Post {
 	// this will not retrieve the details of the user(LAZY) because of inf loop of
 	// one trying to fetch details of the other
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private User user;
 
 	public Integer getId() {
