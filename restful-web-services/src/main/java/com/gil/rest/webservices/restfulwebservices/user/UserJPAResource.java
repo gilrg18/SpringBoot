@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -60,6 +61,23 @@ public class UserJPAResource {
 		return resource;
 	}
 
+	// PUT (UPDATE)
+	@PutMapping("/jpa/users/{id}")
+	public ResponseEntity<Object> updateUser(@PathVariable int id, @Valid @RequestBody User user) {
+		Optional<User> userToUpdate = userRepository.findById(id);
+		if (!userToUpdate.isPresent()) {
+			throw new UserNotFoundException("id-" + id);
+		}
+		// Get the current user info (the one you want to update) and save it
+		User updateInfo = userToUpdate.get();
+		// Add the body request info to the user you want to update
+		updateInfo.setName(user.getName());
+		updateInfo.setBirthDate(user.getBirthDate());
+		User updatedUser = userRepository.save(updateInfo);
+
+		return ResponseEntity.ok(updatedUser);
+	}
+
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		userRepository.deleteById(id);
@@ -91,17 +109,17 @@ public class UserJPAResource {
 	}
 
 	@PostMapping("/jpa/users/{id}/posts")
-	public ResponseEntity<Object> createPost(@PathVariable int id,@RequestBody Post post) {
-		//fetch the user
+	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) {
+		// fetch the user
 		Optional<User> userOptional = userRepository.findById(id);
 		if (!userOptional.isPresent()) {
 			throw new UserNotFoundException("id-" + id);
 		}
-		//we get the user
+		// we get the user
 		User user = userOptional.get();
-		//map the user to the post
+		// map the user to the post
 		post.setUser(user);
-		//save the post to the db
+		// save the post to the db
 		postRepository.save(post);
 		// return the URI /user/{id} -> /user/post.getId()
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId())
